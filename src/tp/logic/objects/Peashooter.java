@@ -1,6 +1,6 @@
-package tp.Logic.objects;
+package tp.logic.objects;
 
-import tp.Logic.Game;
+import tp.logic.Game;
 
 public class Peashooter {
     private static final int COST = 50;

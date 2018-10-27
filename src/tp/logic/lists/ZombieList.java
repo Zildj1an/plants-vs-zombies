@@ -1,6 +1,6 @@
-package tp.Logic.Lists;
+package tp.logic.lists;
 
-import tp.Logic.objects.Zombie;
+import tp.logic.objects.Zombie;
 
 import java.util.ArrayList;
 import java.util.Iterator;

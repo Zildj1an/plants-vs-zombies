@@ -1,8 +1,8 @@
-package tp.Logic;
+package tp.logic;
 
-import tp.Logic.objects.Peashooter;
-import tp.Logic.objects.Sunflower;
-import tp.Logic.objects.Zombie;
+import tp.logic.objects.Peashooter;
+import tp.logic.objects.Sunflower;
+import tp.logic.objects.Zombie;
 import tp.util.MyStringUtils;
 
 public class GamePrinter {

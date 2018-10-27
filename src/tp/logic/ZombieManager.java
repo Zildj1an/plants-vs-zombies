@@ -1,6 +1,6 @@
-package tp.Logic;
+package tp.logic;
 
-import tp.Logic.objects.Level;
+import tp.logic.objects.Level;
 
 import java.util.Random;
 

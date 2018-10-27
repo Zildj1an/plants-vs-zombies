@@ -1,9 +1,9 @@
-package tp.Logic;
+package tp.logic;
 
-import tp.Logic.Lists.PeashooterList;
-import tp.Logic.Lists.SunflowerList;
-import tp.Logic.Lists.ZombieList;
-import tp.Logic.objects.*;
+import tp.logic.lists.PeashooterList;
+import tp.logic.lists.SunflowerList;
+import tp.logic.lists.ZombieList;
+import tp.logic.objects.*;
 import tp.p1.Logic.objects.*;
 
 import java.util.ArrayList;

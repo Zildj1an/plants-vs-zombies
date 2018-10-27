@@ -1,6 +1,6 @@
-package tp.Logic.Lists;
+package tp.logic.lists;
 
-import tp.Logic.objects.Sunflower;
+import tp.logic.objects.Sunflower;
 
 import java.util.ArrayList;
 import java.util.Iterator;

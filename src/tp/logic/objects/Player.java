@@ -1,4 +1,4 @@
-package tp.Logic.objects;
+package tp.logic.objects;
 
 public enum Player {
     PLAYER("Player"), ZOMBIES("Zombies"), NONE("none");

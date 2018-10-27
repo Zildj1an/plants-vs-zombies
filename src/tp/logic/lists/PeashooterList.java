@@ -1,6 +1,6 @@
-package tp.Logic.Lists;
+package tp.logic.lists;
 
-import tp.Logic.objects.Peashooter;
+import tp.logic.objects.Peashooter;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,6 +1,6 @@
-package tp.Logic.objects;
+package tp.logic.objects;
 
-import tp.Logic.Game;
+import tp.logic.Game;
 
 public class Zombie {
     private static final int HEALTH = 5;

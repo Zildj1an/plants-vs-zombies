@@ -1,8 +1,8 @@
-package tp.p1;
+package tp;
 
-import tp.p1.Logic.Game;
-import tp.p1.Logic.objects.Level;
-import tp.p1.controller.Controller;
+import tp.Logic.Game;
+import tp.Logic.objects.Level;
+import tp.controller.Controller;
 
 import java.util.Scanner;
 

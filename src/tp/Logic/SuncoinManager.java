@@ -1,4 +1,4 @@
-package tp.p1.Logic;
+package tp.Logic;
 
 public class SuncoinManager {
     public int suncoins;

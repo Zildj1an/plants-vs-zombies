@@ -1,6 +1,6 @@
-package tp.p1.Logic.objects;
+package tp.Logic.objects;
 
-import tp.p1.Logic.Game;
+import tp.Logic.Game;
 
 public class Sunflower {
     private static final int COST = 20;

@@ -1,4 +1,4 @@
-package tp.p1.util;
+package tp.util;
 
 public class MyStringUtils {
 

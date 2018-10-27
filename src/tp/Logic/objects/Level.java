@@ -1,4 +1,4 @@
-package tp.p1.Logic.objects;
+package tp.Logic.objects;
 
 public enum Level {
     EASY(3,0.1), HARD(5,0.2), INSANE(10,0.3);

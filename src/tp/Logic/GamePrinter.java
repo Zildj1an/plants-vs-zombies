@@ -1,9 +1,9 @@
-package tp.p1.Logic;
+package tp.Logic;
 
-import tp.p1.Logic.objects.Peashooter;
-import tp.p1.Logic.objects.Sunflower;
-import tp.p1.Logic.objects.Zombie;
-import tp.p1.util.MyStringUtils;
+import tp.Logic.objects.Peashooter;
+import tp.Logic.objects.Sunflower;
+import tp.Logic.objects.Zombie;
+import tp.util.MyStringUtils;
 
 public class GamePrinter {
     int dimX;

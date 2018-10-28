@@ -32,11 +32,11 @@ public class Sunflower {
     }
 
     public void update(){
+        cycle++;
         if (cycle == FREQUENCY){
             game.incrementSuncoins(SUNCOINS);
             cycle = 0;
         }
-        cycle++;
     }
 
     public void decreaseHealth(int damage){

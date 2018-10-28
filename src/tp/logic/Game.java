@@ -4,7 +4,6 @@ import tp.logic.lists.PeashooterList;
 import tp.logic.lists.SunflowerList;
 import tp.logic.lists.ZombieList;
 import tp.logic.objects.*;
-import tp.p1.Logic.objects.*;
 
 import java.util.ArrayList;
 import java.util.List;

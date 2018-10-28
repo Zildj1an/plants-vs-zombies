@@ -1,14 +1,23 @@
 package tp.controller;
 
+import tp.controller.commands.Command;
+import tp.controller.commands.CommandParser;
+import tp.controller.commands.HelpCommand;
 import tp.logic.Game;
 import tp.logic.objects.Player;
 
 import java.util.Scanner;
 
 public class Controller {
+
+    private static  final String PROMPT = "COMMAND > ";
+    private static final String UNKNOWNCOMMANDMSG = "Invalid command";
+    private static  final String GAMEOVER = "Game Over";
+
     private Game game;
     private Scanner in;
-    private boolean isFinished = false;
+    private boolean noPrint;
+    private boolean exit = false;
 
     public Controller (Game game, Scanner in){
         this.game = game;
@@ -16,85 +25,39 @@ public class Controller {
     }
 
     public void run(){
-        Player p = Player.NONE;
-        do{
-            System.out.println(game.toString());
-            if ((p = game.hasWinner()) != Player.NONE){
-                isFinished = true;
-                System.out.println("Game Over");
-                System.out.println(p.getName() + " win");
+        Player winner = Player.NONE;
+        do {
+            printGame();
+            noPrint = false;
+
+            System.out.print(PROMPT);
+            String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
+            Command command = CommandParser.parseCommand(words, this);
+
+            if (command != null){
+                command.execute(game, this);
+                if ((winner = game.hasWinner()) != Player.NONE){
+                    System.out.println(GAMEOVER + "\n" + winner.getName() + "win");
+                }
+            }else{
+                //TODO solve err and out print order
+                System.err.println(UNKNOWNCOMMANDMSG);
+                setNoPrintGameState();
             }
-            if (userCommand())
-                game.update();
-        }while(!isFinished);
 
+        }while(!exit && game.hasWinner() == Player.NONE);
     }
 
-    //this method return a boolean, true means that the board needed to be repainted
-    private boolean userCommand(){
-        boolean updateNeeded = false;
-        System.out.print("COMMAND > ");
-        String command[] = in.nextLine().toLowerCase().split(" ");
-
-        switch (command[0]){
-            case "add":
-            case "a":
-                if (command.length != 4) {
-                    System.out.println("[ERROR] add argument, need type of plant, and x, y position");
-                    break;
-                }
-
-                if(command[1].equals("p") || command[1].equals("peashooter")){
-                    if (!game.addPeashooter(Integer.parseInt(command[2]), Integer.parseInt(command[3])))
-                        System.out.println("[ERROR], [P]eashooter could not be added");
-                }else if(command[1].equals("s") || command[1].equals("sunflower")){
-                    if (!game.addSunflower(Integer.parseInt(command[2]), Integer.parseInt(command[3])))
-                        System.out.println("[ERROR], [S]unflower could not be added");
-                }else{
-                    System.out.println("[ERROR],unknown plant");
-                }
-                updateNeeded = true;
-            break;
-
-            case "reset":
-            case "r":
-                game.reset();
-                break;
-
-            case "listPlantsAvailable":
-            case "l":
-                for(String s: game.listPlantsAvailable())
-                    System.out.println(s);
-                break;
-
-            case "exit":
-            case "e":
-                isFinished = true;
-                break;
-
-            case "help":
-            case "h":
-                help();
-                break;
-
-            case "":
-                updateNeeded = true;
-                break;
-
-            default:
-                System.out.println("[ERROR]: Invalid command");
-                break;
-        }
-
-        return updateNeeded;
+    public void setExit(){
+        this.exit = true;
     }
 
-    private void help(){
-        System.out.println("Add <plant> <x> <y>: Adds a plant in position x, y.");
-        System.out.println("List: Prints the listPlantsAvailable of available plants.");
-        System.out.println("Reset: Starts a new game.");
-        System.out.println("Help: Prints this help message.");
-        System.out.println("Exit: Terminates the program.");
-        System.out.println("[none]: Skips cycle.");
+    public void setNoPrintGameState(){
+        noPrint = true;
+    }
+
+    public void printGame(){
+        if (!noPrint)
+            System.out.println(game.toString());
     }
 }

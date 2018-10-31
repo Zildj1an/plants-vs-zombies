@@ -1,4 +1,4 @@
 package tp.logic.objects;
 
-public class Zombie {
+public class Plant {
 }

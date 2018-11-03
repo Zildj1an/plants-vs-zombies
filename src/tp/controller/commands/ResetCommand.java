@@ -4,12 +4,12 @@ import tp.controller.Controller;
 import tp.logic.Game;
 
 public class ResetCommand extends NoParamsCommand {
-    public static final String CommandText = "reset";
-    public static final String CommandTextMsg = "[R]eset";
-    public static final String HelpTextMsg = "reset game";
+    public static final String commandText = "reset";
+    public static final String commandTextMsg = "[R]eset";
+    public static final String helpTextMsg = "reset game";
 
     public ResetCommand(){
-        super(CommandText, CommandTextMsg, HelpTextMsg);
+        super(commandText, commandTextMsg, helpTextMsg);
     }
 
     @Override

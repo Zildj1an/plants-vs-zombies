@@ -2,8 +2,9 @@ package tp.controller;
 
 import tp.controller.commands.Command;
 import tp.controller.commands.CommandParser;
-import tp.controller.commands.HelpCommand;
 import tp.logic.Game;
+import tp.logic.gamePrinter.GamePrinter;
+import tp.logic.gamePrinter.ReleasePrinter;
 import tp.logic.objects.Player;
 
 import java.util.Scanner;
@@ -18,10 +19,12 @@ public class Controller {
     private Scanner in;
     private boolean noPrint;
     private boolean exit = false;
+    private GamePrinter gamePrinter;
 
     public Controller (Game game, Scanner in){
         this.game = game;
         this.in= in;
+        gamePrinter = new ReleasePrinter();
     }
 
     public void run(){
@@ -36,16 +39,15 @@ public class Controller {
 
             if (command != null){
                 command.execute(game, this);
-                if ((winner = game.hasWinner()) != Player.NONE){
-                    System.out.println(GAMEOVER + "\n" + winner.getName() + "win");
-                }
+                winner = game.hasWinner();
             }else{
-                //TODO solve err and out print order
-                System.err.println(UNKNOWNCOMMANDMSG);
+                System.out.println(UNKNOWNCOMMANDMSG);
                 setNoPrintGameState();
             }
 
-        }while(!exit && game.hasWinner() == Player.NONE);
+        }while(!exit && winner == Player.NONE);
+        printGame();
+        System.out.println(GAMEOVER + "\n" + winner.getName() + " win");
     }
 
     public void setExit(){
@@ -56,8 +58,14 @@ public class Controller {
         noPrint = true;
     }
 
-    public void printGame(){
+    private void printGame(){
         if (!noPrint)
             System.out.println(game.toString());
+            //System.out.println(gamePrinter.printGame(game));
+    }
+
+    public void switchPrintMode(){
+        //TODO
+        System.out.println("cambiando modo de pintado");
     }
 }

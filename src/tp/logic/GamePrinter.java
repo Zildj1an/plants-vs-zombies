@@ -1,8 +1,6 @@
 package tp.logic;
 
-import tp.logic.objects.Peashooter;
-import tp.logic.objects.Sunflower;
-import tp.logic.objects.Zombie;
+import tp.logic.objects.*;
 import tp.util.MyStringUtils;
 
 public class GamePrinter {
@@ -20,16 +18,13 @@ public class GamePrinter {
 
     private void encodeGame(Game game) {
         board = new String[dimX][dimY];
-        Sunflower sf;
-        Peashooter ps;
+        Plant p;
         Zombie z;
         for(int i = 0; i < dimX; i++) {
             for(int j = 0; j < dimY; j++) {
 
-                if((sf = game.getSFInPosition(i,j)) != null)
-                    board[i][j] = sf.toString();
-                else if ((ps = game.getPSInPosition(i,j)) != null)
-                    board[i][j] = ps.toString();
+                if((p = game.getPInPosition(i,j)) != null)
+                    board[i][j] = p.toString();
                 else if ((z = game.getZInPosition(i,j)) != null)
                     board[i][j] = z.toString();
                 else

@@ -1,6 +1,7 @@
 package tp.logic;
 
 import tp.logic.objects.Level;
+import tp.logic.objects.Zombie;
 
 import java.util.Random;
 
@@ -26,5 +27,9 @@ public class ZombieManager {
 
     public boolean isZombieAdded(){
         return rand.nextDouble() < frequency && remainingZombies != 0;
+    }
+
+    public Zombie randomTypeZombie(){
+        return null;
     }
 }

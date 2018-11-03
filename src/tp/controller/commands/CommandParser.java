@@ -4,7 +4,7 @@ import tp.controller.Controller;
 
 public class CommandParser {
     private static Command[] availableCommands = { new AddCommand(), new HelpCommand(),
-            new ExitCommand(), new ResetCommand(), new ListCommand(), new UpdateCommand()};
+            new ResetCommand(), new ExitCommand(), new ListCommand(), new ZombieList(), new PrintMode() ,new AddZombie(), new UpdateCommand()};
 
     public static Command parseCommand(String[] commandWords, Controller controller){
 

@@ -4,12 +4,12 @@ import tp.controller.Controller;
 import tp.logic.Game;
 
 public class UpdateCommand extends NoParamsCommand {
-    public static final String CommandText = "";
-    public static final String CommandTextMsg = "none";
-    public static final String HelpTextMsg = "skips cycle.";
+    public static final String commandText = "";
+    public static final String commandTextMsg = "none";
+    public static final String helpTextMsg = "skips cycle.";
 
     public UpdateCommand() {
-        super(CommandText, CommandTextMsg, HelpTextMsg);
+        super(commandText, commandTextMsg, helpTextMsg);
     }
 
     public void execute(Game game, Controller controller) {

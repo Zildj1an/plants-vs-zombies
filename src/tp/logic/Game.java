@@ -1,12 +1,10 @@
 package tp.logic;
 
-import tp.logic.lists.PeashooterList;
-import tp.logic.lists.SunflowerList;
-import tp.logic.lists.ZombieList;
+import tp.logic.factories.PlantFactory;
+import tp.logic.factories.ZombieFactory;
+import tp.logic.lists.GameObjectList;
 import tp.logic.objects.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Game {
@@ -15,9 +13,8 @@ public class Game {
     public static final int COLUMNS = 8;
     private static final int DEFAULT_SEED = 0;
 
-    private SunflowerList sunflowerList;
-    private PeashooterList peashooterList;
-    private ZombieList zombieList;
+    private GameObjectList plantList;
+    private GameObjectList zombieList;
     private SuncoinManager suncoinManager;
     private ZombieManager zombieManager;
     private int cycles;
@@ -39,55 +36,50 @@ public class Game {
 
     public void update(){
         cycles++;
-        sunflowerList.update();
-        peashooterList.update();
+
+        plantList.update();
+        zombieList.update();
 
         if (zombieManager.isZombieAdded() && canZombieAdded()) {
             int row;
             do {
                 row = rand.nextInt(ROWS);
             }while(!isEmpty(row, COLUMNS-1));
-            zombieList.add(new Zombie(row, COLUMNS - 1, this));
+            zombieList.add(new CommonZombie(row, COLUMNS - 1, this));
             zombieManager.updateRemainingZombies();
 
         }
-
-        zombieList.update();
 
         if(zombieList.size() == 0 && zombieManager.getRemainingZombies() == 0)
             updateWinner(Player.PLAYER);
 
     }
 
-    public boolean addPeashooter(int x, int y){
+    public boolean addPlant(String plant, int x, int y){
+        Plant p = PlantFactory.getPlant(plant);
         boolean added = false;
 
-        if (isEmpty(x, y) && suncoinManager.suncoins >= Peashooter.getCost() && isValidPosition(x,y)) {
-            peashooterList.add(new Peashooter(x, y, this));
-            suncoinManager.suncoins -= Peashooter.getCost();
+        if (p != null && isEmpty(x, y) && suncoinManager.suncoins >= p.getCost() && isValidPosition(x, y)){
+            p.setPosition(x,y);
+            p.setGame(this);
+            suncoinManager.suncoins-= p.getCost();
+            plantList.add(p);
             added = true;
         }
+
 
         return added;
     }
 
-    public boolean addSunflower(int x, int y){
-        boolean added = false;
+    //Method only for debug purpose
+    public boolean addZombie(String zombie, int x, int y){
+        Zombie z = ZombieFactory.getZombie(zombie);
 
-        if (isEmpty(x, y) && suncoinManager.suncoins >= Sunflower.getCost() && isValidPosition(x, y)) {
-            sunflowerList.add(new Sunflower(x, y, this));
-            suncoinManager.suncoins -= Sunflower.getCost();
-            added = true;
+        if (z != null){
+            zombieList.add(z);
+            //todo set game and set position
         }
-        return added;
-    }
-
-    public List<String> listPlantsAvailable(){
-        List<String> l = new ArrayList<>();
-        l.add(Peashooter.getInfo());
-        l.add(Sunflower.getInfo());
-
-        return l;
+        return z != null;
     }
 
     public void reset(){
@@ -95,35 +87,29 @@ public class Game {
     }
 
     public boolean isEmpty(int x, int y){
-        return getSFInPosition(x, y) == null && getZInPosition(x, y) == null && getPSInPosition(x, y) == null;
+        return getPInPosition(x, y) == null && getZInPosition(x, y) == null;
     }
 
     private boolean isValidPosition(int x, int y){
-        return x < ROWS && y < COLUMNS && x >= 0 && y >= 0;
+        return x < ROWS && y < COLUMNS-1 && x >= 0 && y >= 0;
     }
 
-    public Sunflower getSFInPosition(int x, int y){
-        return sunflowerList.search(x,y);
-    }
-
-    public Peashooter getPSInPosition(int x, int y){
-        return peashooterList.search(x,y);
+    public Plant getPInPosition(int x, int y){
+        //TODO ask casting
+        return (Plant) plantList.search(x, y);
     }
 
     public Zombie getZInPosition(int x, int y){
-        return zombieList.search(x,y);
+        //TODO ask casting
+        return (Zombie) zombieList.search(x, y);
     }
 
     public void incrementSuncoins(int n){
         this.suncoinManager.suncoins += n;
     }
 
-    public void removeSunflower(Sunflower sf){
-        sunflowerList.remove(sf);
-    }
-
-    public void removePeasooter(Peashooter ps){
-        peashooterList.remove(ps);
+    public void removePlant(Plant p){
+        plantList.remove(p);
     }
 
     public void removeZombie(Zombie z){
@@ -151,9 +137,8 @@ public class Game {
     }
 
     private void initialize(){
-        this.sunflowerList = new SunflowerList();
-        this.peashooterList = new PeashooterList();
-        this.zombieList = new ZombieList();
+        this.plantList = new GameObjectList();
+        this.zombieList = new GameObjectList();
         this.suncoinManager = new SuncoinManager();
         this.rand = new Random(seed);
         this.zombieManager = new ZombieManager(level, rand);

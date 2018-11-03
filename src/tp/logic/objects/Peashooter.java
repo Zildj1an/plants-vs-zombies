@@ -1,33 +1,19 @@
 package tp.logic.objects;
 
+
 import tp.logic.Game;
 
-public class Peashooter {
+public class Peashooter extends Plant{
     private static final int COST = 50;
     private static final int HEALTH = 3;
     private static final int FREQUENCY = 1;
     private static final int DAMAGE = 1;
 
-    private int x;
-    private int y;
-    private Game game;
-    private int health;
-    private int cycle;
 
-    public Peashooter(int x, int y, Game game){
-        this.health = HEALTH;
-        this.x = x;
-        this.y = y;
-        this.cycle = 0;
-        this.game = game;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
+    public Peashooter(){
+        super(COST);
+        super.health = HEALTH;
+        super.cycle = 0;
     }
 
     public void update(){
@@ -51,14 +37,10 @@ public class Peashooter {
     public void decreaseHealth(int damage){
         this.health -= damage;
         if (health == 0)
-            game.removePeasooter(this);
+            game.removePlant(this);
     }
 
-    public static int getCost(){
-        return COST;
-    }
-
-    public static String getInfo(){
+    public String getInfo(){
         return "[P]eashooter: Cost: " + COST + " suncoins Harm: " + DAMAGE;
     }
 

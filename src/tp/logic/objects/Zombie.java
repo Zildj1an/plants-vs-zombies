@@ -2,12 +2,15 @@ package tp.logic.objects;
 
 public abstract class Zombie extends GameObject{
 
+    private static final char SYMBOL = 'Z';
+
     private int frequency;
     private int damage;
 
     public Zombie(int frequency, int damage){
         this.frequency = frequency;
         this.damage = damage;
+        super.symbol = SYMBOL;
     }
 
     @Override
@@ -17,13 +20,9 @@ public abstract class Zombie extends GameObject{
             game.removeZombie(this);
     }
 
-    public String toString(){
-        return "Z[" + health + "]";
-    }
-
     public void update(){
         cycle++;
-        GameObject p;
+        Plant p;
         if(cycle >= frequency && game.isEmpty(x, y-1)){
             y--;
             cycle = 0;
@@ -34,4 +33,6 @@ public abstract class Zombie extends GameObject{
         if(y == 0)
             game.updateWinner(Player.ZOMBIES);
     }
+
+    public abstract String getInfo();
 }

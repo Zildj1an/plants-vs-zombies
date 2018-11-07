@@ -45,7 +45,10 @@ public class Game {
             do {
                 row = rand.nextInt(ROWS);
             }while(!isEmpty(row, COLUMNS-1));
-            zombieList.add(new CommonZombie(row, COLUMNS - 1, this));
+            Zombie z = zombieManager.getRandomTypeZombie();
+            z.setGame(this);
+            z.setPosition(row, COLUMNS-1);
+            zombieList.add(z);
             zombieManager.updateRemainingZombies();
 
         }
@@ -76,8 +79,9 @@ public class Game {
         Zombie z = ZombieFactory.getZombie(zombie);
 
         if (z != null){
+            z.setPosition(x,y);
+            z.setGame(this);
             zombieList.add(z);
-            //todo set game and set position
         }
         return z != null;
     }
@@ -95,12 +99,10 @@ public class Game {
     }
 
     public Plant getPInPosition(int x, int y){
-        //TODO ask casting
         return (Plant) plantList.search(x, y);
     }
 
     public Zombie getZInPosition(int x, int y){
-        //TODO ask casting
         return (Zombie) zombieList.search(x, y);
     }
 
@@ -148,17 +150,19 @@ public class Game {
 
     public String toString(){
         StringBuilder buff = new StringBuilder();
-        GamePrinter gamePrinter = new GamePrinter(this, ROWS, COLUMNS);
 
         if(cycles == 0)
-            buff.append("Random seed used: ").append(this.seed).append("\r\n");
+            buff.append("Random seed used: ").append(this.seed).append(System.getProperty("line.separator"));
 
-        buff.append("Number of cycles: ").append(this.cycles).append("\r\n");
-        buff.append("Sun coins: ").append(suncoinManager.suncoins).append("\r\n");
-        buff.append("Remaining zombies: ").append(zombieManager.getRemainingZombies()).append("\r\n");
-
-        buff.append(gamePrinter.toString());
+        buff.append("Number of cycles: ").append(this.cycles).append(System.getProperty("line.separator"));
+        buff.append("Sun coins: ").append(suncoinManager.suncoins).append(System.getProperty("line.separator"));
+        buff.append("Remaining zombies: ").append(zombieManager.getRemainingZombies()).append(System.getProperty("line.separator"));
 
         return buff.toString();
+    }
+
+    public String deubInfo(){
+        //TODO
+        return null;
     }
 }

@@ -4,7 +4,6 @@ import tp.controller.Controller;
 import tp.logic.Game;
 
 public class AddZombie extends Command {
-    //TODO think new name for this command
     public static final String commandText = "addzombie";
     public static final String commandTextMsg = "[A]dd";
     public static final String helpTextMsg = "add zombie";
@@ -19,7 +18,9 @@ public class AddZombie extends Command {
 
     @Override
     public void execute(Game game, Controller controller) {
-        game.addZombie(zombie, x, y);
+        if(!game.addZombie(zombie, x, y)){
+            System.out.println("[ERROR] zombie " + zombie + " couldn't be added");
+        }
     }
 
     @Override

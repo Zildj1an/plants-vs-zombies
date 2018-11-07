@@ -7,25 +7,24 @@ public class Sunflower extends Plant{
     private static final int DAMAGE = 0;
     private static final int SUNCOINS = 10;
 
+    private static final char SYMBOL = 'S';
+
     public Sunflower(){
         super(COST);
         super.health = HEALTH;
-        super.cycle = 0;
+        super.cycle = FREQUENCY;
+        super.symbol = SYMBOL;
     }
 
     public void update(){
-        cycle++;
-        if (cycle == FREQUENCY){
+        if (super.cycle == 0){
             game.incrementSuncoins(SUNCOINS);
-            cycle = 0;
-        }
+            super.cycle = FREQUENCY;
+        }else
+            super.cycle--;
     }
 
     public String getInfo(){
-        return "[S]unflower: Cost: " + COST + " suncoins Harm: " + DAMAGE;
-    }
-
-    public String toString(){
-        return "S["+ health +"]";
+        return "[" + SYMBOL +"]unflower: Cost: " + COST + " suncoins Harm: " + DAMAGE;
     }
 }

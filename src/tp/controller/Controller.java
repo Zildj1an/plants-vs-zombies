@@ -3,6 +3,7 @@ package tp.controller;
 import tp.controller.commands.Command;
 import tp.controller.commands.CommandParser;
 import tp.logic.Game;
+import tp.logic.gamePrinter.DebugPrinter;
 import tp.logic.gamePrinter.GamePrinter;
 import tp.logic.gamePrinter.ReleasePrinter;
 import tp.logic.objects.Player;
@@ -20,11 +21,13 @@ public class Controller {
     private boolean noPrint;
     private boolean exit = false;
     private GamePrinter gamePrinter;
+    private boolean debugPrinter;
 
     public Controller (Game game, Scanner in){
         this.game = game;
         this.in= in;
         gamePrinter = new ReleasePrinter();
+        debugPrinter = false;
     }
 
     public void run(){
@@ -60,12 +63,11 @@ public class Controller {
 
     private void printGame(){
         if (!noPrint)
-            System.out.println(game.toString());
-            //System.out.println(gamePrinter.printGame(game));
+            System.out.println(gamePrinter.printGame(game));
     }
 
     public void switchPrintMode(){
-        //TODO
-        System.out.println("cambiando modo de pintado");
+        debugPrinter ^= true;
+        gamePrinter = debugPrinter ? new DebugPrinter() : new ReleasePrinter();
     }
 }

@@ -1,7 +1,5 @@
 package tp.logic.objects;
 
-import tp.logic.Game;
-
 public class Athlete extends Zombie {
     private static final int HEALTH = 5;
     private static final int FREQUENCY = 2;
@@ -13,12 +11,9 @@ public class Athlete extends Zombie {
         super.cycle = 0;
     }
 
-    public Athlete(int x, int y, Game game){
-        super(FREQUENCY, DAMAGE);
-        super.game = game;
-        super.x = x;
-        super.y = y;
-        super.health = HEALTH;
-        super.cycle = 0;
+
+    @Override
+    public String getInfo() {
+        return "[Z]ombie athlete: speed: " + FREQUENCY + " Harm: " + DAMAGE + " Life: " + HEALTH;
     }
 }

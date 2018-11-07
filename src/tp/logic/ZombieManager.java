@@ -1,5 +1,6 @@
 package tp.logic;
 
+import tp.logic.factories.ZombieFactory;
 import tp.logic.objects.Level;
 import tp.logic.objects.Zombie;
 
@@ -29,7 +30,7 @@ public class ZombieManager {
         return rand.nextDouble() < frequency && remainingZombies != 0;
     }
 
-    public Zombie randomTypeZombie(){
-        return null;
+    public Zombie getRandomTypeZombie(){
+        return ZombieFactory.getRandomZombie(rand);
     }
 }

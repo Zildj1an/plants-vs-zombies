@@ -1,6 +1,7 @@
 package tp.logic.gamePrinter;
 
 import tp.logic.Game;
+import tp.logic.objects.GameObject;
 import tp.logic.objects.Plant;
 import tp.logic.objects.Zombie;
 import tp.util.MyStringUtils;
@@ -19,6 +20,7 @@ public class ReleasePrinter extends BoardPrinter implements GamePrinter{
         String lineDelimiter = String.format("%n%s%s%n", margin + space, rowDelimiter);
 
         StringBuilder str = new StringBuilder();
+        str.append(game.toString()).append(System.getProperty("line.separator"));
         str.append(lineDelimiter);
 
         encodeGame(game);
@@ -36,7 +38,7 @@ public class ReleasePrinter extends BoardPrinter implements GamePrinter{
     @Override
     public void encodeGame(Game game) {
         board = new String[Game.ROWS][Game.COLUMNS];
-        Plant p;
+        GameObject p;
         Zombie z;
         for(int i = 0; i < Game.ROWS; i++) {
             for(int j = 0; j < Game.COLUMNS; j++) {

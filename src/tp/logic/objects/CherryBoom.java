@@ -9,23 +9,25 @@ public class CherryBoom extends Plant{
     private static final int FREQUENCY = 2;
     private static final int DAMAGE = 10;
 
+    private static final char SYMBOL = 'C';
+
     public CherryBoom() {
         super(COST);
         super.health = HEALTH;
-        super.cycle = 0;
+        super.cycle = FREQUENCY;
+        super.symbol = SYMBOL;
     }
 
     @Override
     public String getInfo() {
-        return "[C]herryBoom: Cost: " + COST + " suncoins Harm: " + DAMAGE;
+        return "[" + SYMBOL + "]herryBoom: Cost: " + COST + " suncoins Harm: " + DAMAGE;
     }
 
     @Override
     public void update() {
-        cycle++;
         Zombie z;
 
-        if (cycle == FREQUENCY){
+        if (cycle == 0){
             for(int i = Math.max(x-1, 0); i <= Math.min(x+1, Game.ROWS); i++){
                 for (int j = Math.max(y-1, 0); j <= Math.min(y+1, Game.COLUMNS); j++){
                     if ((z = game.getZInPosition(i,j)) != null){
@@ -34,10 +36,7 @@ public class CherryBoom extends Plant{
                 }
             }
             game.removePlant(this);
-        }
-    }
-
-    public String toString(){
-        return "C["+ health +"]";
+        }else
+            cycle--;
     }
 }

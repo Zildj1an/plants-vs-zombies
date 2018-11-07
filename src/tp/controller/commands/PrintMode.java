@@ -16,6 +16,5 @@ public class PrintMode extends NoParamsCommand {
     @Override
     public void execute(Game game, Controller controller) {
         controller.switchPrintMode();
-        controller.setNoPrintGameState();
     }
 }

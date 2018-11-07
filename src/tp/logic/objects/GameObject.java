@@ -8,6 +8,7 @@ public abstract class GameObject {
     protected Game game;
     protected int health;
     protected int cycle;
+    protected char symbol;
 
     public int getX(){
         return this.x;
@@ -30,5 +31,14 @@ public abstract class GameObject {
         this.game = g;
     }
 
-    public abstract String toString();
+    public String toString(){
+            return symbol+ "["+ health +"]";
+    }
+
+    public String debugPrint() {
+
+        //TODO change ? for total health
+        return symbol + "[" + health + ":?,x:" + x + ",y:" + y +",t:" + cycle + "]";
+
+    }
 }

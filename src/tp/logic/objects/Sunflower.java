@@ -2,7 +2,7 @@ package tp.logic.objects;
 
 public class Sunflower extends Plant{
     private static final int COST = 20;
-    private static final int HEALTH = 1;
+    private static final int HEALTH = 2;
     private static final int FREQUENCY = 2;
     private static final int DAMAGE = 0;
     private static final int SUNCOINS = 10;

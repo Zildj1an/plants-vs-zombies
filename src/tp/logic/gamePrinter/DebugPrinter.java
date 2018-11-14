@@ -40,8 +40,12 @@ public class DebugPrinter extends BoardPrinter implements GamePrinter{
 
         StringBuilder str = new StringBuilder();
 
+        str.append(game.debugInfo());
+
         str.append(lineDelimiter);
-        str.append(vDelimiter);
+        if (pos != 0)
+            str.append(vDelimiter);
+
         for (int i = 0; i < pos; i++){
             str.append(board[0][i]).append(vDelimiter);
         }

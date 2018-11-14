@@ -11,8 +11,7 @@ public abstract class NoParamsCommand extends Command {
     @Override
     public Command parse(String[] commandWords, Controller controller) {
 
-        //TODO check only letter command
-        if (commandWords[0].equals(""))
+        if(commandName.equals(""))
             return (commandWords.length == 1 && commandWords[0].equalsIgnoreCase(commandName) ? this : null);
         else
             return (commandWords.length == 1 && (commandWords[0].equalsIgnoreCase(commandName) || commandWords[0].equals(Character.toString(commandName.charAt(0)))) ? this : null);

@@ -1,11 +1,11 @@
 package tp.logic.objects;
 
-public class BucketHead extends Zombie{
+public class BucketheadZombie extends Zombie{
     private static final int HEALTH = 8;
     private static final int FREQUENCY = 4;
     private static final int DAMAGE = 1;
 
-    public BucketHead() {
+    public BucketheadZombie() {
         super(FREQUENCY, DAMAGE);
         super.health = HEALTH;
         super.cycle = 0;

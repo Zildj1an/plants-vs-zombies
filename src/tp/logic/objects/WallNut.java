@@ -10,6 +10,7 @@ public class WallNut extends Plant{
     public WallNut(){
         super(COST);
         this.health = HEALTH;
+        super.symbol = SYMBOL;
     }
 
     @Override

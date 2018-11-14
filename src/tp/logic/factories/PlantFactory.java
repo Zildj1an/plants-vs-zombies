@@ -21,9 +21,11 @@ public class PlantFactory {
             case "cherryBoom":
             case "c":
                 p = new CherryBoom();
+                break;
             case "wallnut":
             case "n":
                 p = new WallNut();
+                break;
         }
 
         return p;

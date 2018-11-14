@@ -37,8 +37,7 @@ public abstract class GameObject {
 
     public String debugPrint() {
 
-        //TODO change ? for total health
-        return symbol + "[" + health + ":?,x:" + x + ",y:" + y +",t:" + cycle + "]";
+        return symbol + "[l:" + health + ",x:" + x + ",y:" + y +",t:" + cycle + "]";
 
     }
 }

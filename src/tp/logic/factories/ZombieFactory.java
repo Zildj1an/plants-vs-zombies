@@ -1,7 +1,7 @@
 package tp.logic.factories;
 
-import tp.logic.objects.Athlete;
-import tp.logic.objects.BucketHead;
+import tp.logic.objects.SportyZombie;
+import tp.logic.objects.BucketheadZombie;
 import tp.logic.objects.CommonZombie;
 import tp.logic.objects.Zombie;
 
@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class ZombieFactory {
 
-    private static Zombie[] availableZombies = {new Athlete(), new BucketHead(), new CommonZombie()};
+    private static Zombie[] availableZombies = {new SportyZombie(), new BucketheadZombie(), new CommonZombie()};
     private static String[] zombieNames = {"athlete", "common", "buckethead"};
 
     public static Zombie getZombie(String zombieName){
@@ -18,7 +18,7 @@ public class ZombieFactory {
         switch (zombieName){
             case "athlete":
             case "a":
-                z = new Athlete();
+                z = new SportyZombie();
                 break;
             case "common":
             case "c":
@@ -26,7 +26,7 @@ public class ZombieFactory {
                 break;
             case "buckethead":
             case "b":
-                z = new BucketHead();
+                z = new BucketheadZombie();
                 break;
         }
 

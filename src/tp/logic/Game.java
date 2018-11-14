@@ -35,8 +35,6 @@ public class Game {
     }
 
     public void update(){
-        cycles++;
-
         plantList.update();
         zombieList.update();
 
@@ -45,13 +43,15 @@ public class Game {
             do {
                 row = rand.nextInt(ROWS);
             }while(!isEmpty(row, COLUMNS-1));
+
             Zombie z = zombieManager.getRandomTypeZombie();
             z.setGame(this);
             z.setPosition(row, COLUMNS-1);
             zombieList.add(z);
             zombieManager.updateRemainingZombies();
-
         }
+
+        cycles++;
 
         if(zombieList.size() == 0 && zombieManager.getRemainingZombies() == 0)
             updateWinner(Player.PLAYER);
@@ -154,6 +154,25 @@ public class Game {
         if(cycles == 0)
             buff.append("Random seed used: ").append(this.seed).append(System.getProperty("line.separator"));
 
+        buff.append(info());
+
+        return buff.toString();
+    }
+
+    public String debugInfo(){
+        StringBuilder buff = new StringBuilder();
+
+        buff.append(info());
+        buff.append("Level: ").append(level.toString()).append(System.getProperty("line.separator"));
+        buff.append("Seed: ").append(seed);
+
+
+        return buff.toString();
+    }
+
+    private String info(){
+        StringBuilder buff = new StringBuilder();
+
         buff.append("Number of cycles: ").append(this.cycles).append(System.getProperty("line.separator"));
         buff.append("Sun coins: ").append(suncoinManager.suncoins).append(System.getProperty("line.separator"));
         buff.append("Remaining zombies: ").append(zombieManager.getRemainingZombies()).append(System.getProperty("line.separator"));
@@ -161,8 +180,4 @@ public class Game {
         return buff.toString();
     }
 
-    public String deubInfo(){
-        //TODO
-        return null;
-    }
 }

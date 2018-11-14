@@ -27,7 +27,6 @@ public class AddZombie extends Command {
     public Command parse(String[] commandWords, Controller controller) {
         Command c = null;
 
-        //if(commandWords.length == 4 && (commandWords[0].equals(commandText) || commandWords[0].equals(Character.toString(commandText.charAt(0))))) {
         if(commandWords.length == 4 && (commandWords[0].equals(commandText))) {
             c = this;
             this.zombie = commandWords[1];

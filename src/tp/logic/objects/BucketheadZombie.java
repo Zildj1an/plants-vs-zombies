@@ -8,7 +8,7 @@ public class BucketheadZombie extends Zombie{
     public BucketheadZombie() {
         super(FREQUENCY, DAMAGE);
         super.health = HEALTH;
-        super.cycle = 0;
+        super.cycle = FREQUENCY-1;
     }
 
     @Override

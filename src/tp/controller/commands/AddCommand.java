@@ -23,6 +23,7 @@ public class AddCommand extends Command{
             System.out.println("[ERROR] plant " + plant + " couldn't be added");
             controller.setNoPrintGameState();
         }
+        game.update();
     }
 
     @Override

@@ -9,7 +9,7 @@ public class CommonZombie extends Zombie{
     public CommonZombie(){
         super(FREQUENCY, DAMAGE);
         super.health = HEALTH;
-        super.cycle = 0;
+        super.cycle = FREQUENCY-1;
     }
 
     @Override

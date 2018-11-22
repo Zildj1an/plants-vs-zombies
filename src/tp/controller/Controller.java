@@ -21,13 +21,11 @@ public class Controller {
     private boolean noPrint;
     private boolean exit = false;
     private GamePrinter gamePrinter;
-    private boolean debugPrinter;
 
     public Controller (Game game, Scanner in){
         this.game = game;
         this.in= in;
         gamePrinter = new ReleasePrinter();
-        debugPrinter = false;
     }
 
     public void run(){
@@ -66,8 +64,7 @@ public class Controller {
             System.out.println(gamePrinter.printGame(game));
     }
 
-    public void switchPrintMode(){
-        debugPrinter ^= true;
-        gamePrinter = debugPrinter ? new DebugPrinter() : new ReleasePrinter();
+    public void setModePrint(GamePrinter mode){
+        gamePrinter = mode;
     }
 }

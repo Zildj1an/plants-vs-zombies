@@ -16,8 +16,8 @@ public class ZombieFactory {
         Zombie z = null;
 
         switch (zombieName){
-            case "athlete":
-            case "a":
+            case "sporty":
+            case "s":
                 z = new SportyZombie();
                 break;
             case "common":
@@ -44,19 +44,4 @@ public class ZombieFactory {
     public static Zombie getRandomZombie(Random rand){
         return getZombie(zombieNames[rand.nextInt(zombieNames.length)]);
     }
-
-
-    /*
-    public static Zombie getRandomZombie(Random rand){
-        Zombie z = null;
-
-        try {
-            z = availableZombies[rand.nextInt(availableZombies.length)].getClass().newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        return z;
-   }
-   */
 }

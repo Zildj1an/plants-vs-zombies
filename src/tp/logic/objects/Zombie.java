@@ -21,14 +21,16 @@ public abstract class Zombie extends GameObject{
     }
 
     public void update(){
-        cycle++;
         Plant p;
-        if(cycle >= frequency && game.isEmpty(x, y-1)){
+
+        if(cycle <= 0 && game.isEmpty(x, y-1)){
             y--;
-            cycle = 0;
+            cycle = frequency;
         }else if ((p = game.getPInPosition(x, y-1)) != null){
             p.decreaseHealth(damage);
         }
+
+        cycle--;
 
         if(y == 0)
             game.updateWinner(Player.ZOMBIES);

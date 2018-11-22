@@ -6,7 +6,7 @@ import tp.logic.Game;
 public class AddZombie extends Command {
     public static final String commandText = "addzombie";
     public static final String commandTextMsg = "[A]dd";
-    public static final String helpTextMsg = "add zombie";
+    public static final String helpTextMsg = "add zombie [only debug purpose]";
 
     private String zombie;
     private int x;

@@ -14,7 +14,7 @@ public class Peashooter extends Plant{
     public Peashooter(){
         super(COST);
         super.health = HEALTH;
-        super.cycle = FREQUENCY;
+        super.cycle = 0;
         super.symbol = SYMBOL;
     }
 
@@ -32,8 +32,8 @@ public class Peashooter extends Plant{
                 i++;
             }
             cycle = FREQUENCY;
-        }else
-            cycle--;
+        }
+        cycle--;
     }
 
     public void decreaseHealth(int damage){

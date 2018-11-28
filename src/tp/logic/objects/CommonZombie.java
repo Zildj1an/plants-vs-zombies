@@ -6,10 +6,13 @@ public class CommonZombie extends Zombie{
     private static final int FREQUENCY = 2;
     private static final int DAMAGE = 1;
 
+    private static final char SYMBOL = 'Z';
+
     public CommonZombie(){
         super(FREQUENCY, DAMAGE);
         super.health = HEALTH;
         super.cycle = FREQUENCY-1;
+        super.symbol = SYMBOL;
     }
 
     @Override

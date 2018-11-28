@@ -1,7 +1,7 @@
 package tp.logic.gamePrinter;
 
 import tp.logic.Game;
-import tp.logic.objects.GameObject;
+import tp.logic.objects.ActiveGameObject;
 import tp.util.MyStringUtils;
 
 public class DebugPrinter extends BoardPrinter implements GamePrinter{
@@ -12,13 +12,11 @@ public class DebugPrinter extends BoardPrinter implements GamePrinter{
     public void encodeGame(Game game) {
         board = new String[1][100];
         pos = 0;
-        GameObject g;
+        ActiveGameObject g;
 
         for (int i = 0; i < Game.ROWS; i++){
             for (int j = 0; j < Game.COLUMNS; j++){
-                if((g = game.getPInPosition(i,j)) != null)
-                    board[0][pos++] = g.debugPrint();
-                else if ((g = game.getZInPosition(i,j)) != null)
+                if((g = game.getActiveObjectPosition(i,j)) != null)
                     board[0][pos++] = g.debugPrint();
             }
         }

@@ -25,17 +25,17 @@ public class CherryBoom extends Plant{
 
     @Override
     public void update() {
-        Zombie z;
+        ActiveGameObject z;
 
         if (cycle == 0){
             for(int i = Math.max(x-1, 0); i <= Math.min(x+1, Game.ROWS); i++){
                 for (int j = Math.max(y-1, 0); j <= Math.min(y+1, Game.COLUMNS); j++){
-                    if ((z = game.getZInPosition(i,j)) != null){
+                    if ((z = game.getActiveObjectPosition(i,j)) != null && !z.isPlant()){
                         z.decreaseHealth(DAMAGE);
                     }
                 }
             }
-            game.removePlant(this);
+            game.removeActiveGameObject(this);
         }else
             cycle--;
     }

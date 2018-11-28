@@ -14,7 +14,7 @@ public class Peashooter extends Plant{
     public Peashooter(){
         super(COST);
         super.health = HEALTH;
-        super.cycle = 0;
+        super.cycle = FREQUENCY;
         super.symbol = SYMBOL;
     }
 
@@ -22,10 +22,10 @@ public class Peashooter extends Plant{
         if(cycle == 0) {
             int i = y + 1;
             boolean found = false;
-            Zombie z;
+            ActiveGameObject z;
 
             while (i < Game.COLUMNS && !found) {
-                if ((z = game.getZInPosition(x, i)) != null) {
+                if ((z = game.getActiveObjectPosition(x, i)) != null && !z.isPlant()) {
                     found = true;
                     z.decreaseHealth(DAMAGE);
                 }
@@ -39,7 +39,7 @@ public class Peashooter extends Plant{
     public void decreaseHealth(int damage){
         this.health -= damage;
         if (health == 0)
-            game.removePlant(this);
+            game.removeActiveGameObject(this);
     }
 
     public String getInfo(){

@@ -1,6 +1,6 @@
 package tp.logic.objects;
 
-public abstract class Plant extends GameObject {
+public abstract class Plant extends ActiveGameObject {
 
     private int cost;
 
@@ -9,10 +9,15 @@ public abstract class Plant extends GameObject {
     }
 
     @Override
+    public boolean isPlant() {
+        return true;
+    }
+
+    @Override
     public void decreaseHealth(int damage) {
         health -= damage;
         if (health == 0)
-            game.removePlant(this);
+            game.removeActiveGameObject(this);
     }
 
     public int getCost(){

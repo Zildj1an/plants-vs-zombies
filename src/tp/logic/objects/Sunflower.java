@@ -18,7 +18,8 @@ public class Sunflower extends Plant{
 
     public void update(){
         if (super.cycle == 0){
-            game.incrementSuncoins(SUNCOINS);
+            game.addSun(x, y);
+            //game.incrementSuncoins(SUNCOINS);
             super.cycle = FREQUENCY;
         }else
             super.cycle--;

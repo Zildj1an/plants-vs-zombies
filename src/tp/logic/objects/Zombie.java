@@ -1,6 +1,6 @@
 package tp.logic.objects;
 
-public abstract class Zombie extends GameObject{
+public abstract class Zombie extends ActiveGameObject {
 
     private int frequency;
     private int damage;
@@ -14,16 +14,16 @@ public abstract class Zombie extends GameObject{
     public void decreaseHealth(int damage) {
         health -= damage;
         if (health <= 0)
-            game.removeZombie(this);
+            game.removeActiveGameObject(this);
     }
 
     public void update(){
-        Plant p;
+        ActiveGameObject p;
 
         if(cycle <= 0 && game.isEmpty(x, y-1)){
             y--;
             cycle = frequency;
-        }else if ((p = game.getPInPosition(x, y-1)) != null){
+        }else if ((p = game.getActiveObjectPosition(x, y-1)) != null && p.isPlant()){
             p.decreaseHealth(damage);
         }
 
@@ -31,6 +31,11 @@ public abstract class Zombie extends GameObject{
 
         if(y == 0)
             game.updateWinner(Player.ZOMBIES);
+    }
+
+    @Override
+    public boolean isPlant() {
+        return false;
     }
 
     public abstract String getInfo();

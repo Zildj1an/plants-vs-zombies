@@ -1,8 +1,7 @@
 package tp.logic.gamePrinter;
 
 import tp.logic.Game;
-import tp.logic.objects.GameObject;
-import tp.logic.objects.Plant;
+import tp.logic.objects.ActiveGameObject;
 import tp.logic.objects.Zombie;
 import tp.util.MyStringUtils;
 
@@ -38,17 +37,10 @@ public class ReleasePrinter extends BoardPrinter implements GamePrinter{
     @Override
     public void encodeGame(Game game) {
         board = new String[Game.ROWS][Game.COLUMNS];
-        GameObject p;
-        Zombie z;
+
         for(int i = 0; i < Game.ROWS; i++) {
             for(int j = 0; j < Game.COLUMNS; j++) {
-
-                if((p = game.getPInPosition(i,j)) != null)
-                    board[i][j] = p.toString();
-                else if ((z = game.getZInPosition(i,j)) != null)
-                    board[i][j] = z.toString();
-                else
-                    board[i][j] =  space;
+                board[i][j] = game.positionToString(i, j);
             }
         }
     }

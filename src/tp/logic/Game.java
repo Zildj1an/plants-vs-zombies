@@ -2,7 +2,8 @@ package tp.logic;
 
 import tp.logic.factories.PlantFactory;
 import tp.logic.factories.ZombieFactory;
-import tp.logic.lists.GameObjectList;
+import tp.logic.lists.ActiveGameObjectList;
+import tp.logic.lists.PassiveGameObjectList;
 import tp.logic.objects.*;
 
 import java.util.Random;
@@ -13,9 +14,10 @@ public class Game {
     public static final int COLUMNS = 8;
     private static final int DEFAULT_SEED = 0;
 
-    private GameObjectList plantList;
-    private GameObjectList zombieList;
-    private SuncoinManager suncoinManager;
+    private PassiveGameObjectList pasiveGameObjectList;
+    private ActiveGameObjectList activeGameObjectList;
+
+    private SunManager sunManager;
     private ZombieManager zombieManager;
     private int cycles;
     private Level level;
@@ -35,8 +37,8 @@ public class Game {
     }
 
     public void update(){
-        plantList.update();
-        zombieList.update();
+        activeGameObjectList.update();
+        sunManager.update();
 
         if (zombieManager.isZombieAdded() && canZombieAdded()) {
             int row;
@@ -47,13 +49,13 @@ public class Game {
             Zombie z = zombieManager.getRandomTypeZombie();
             z.setGame(this);
             z.setPosition(row, COLUMNS-1);
-            zombieList.add(z);
+            activeGameObjectList.add(z);
             zombieManager.updateRemainingZombies();
         }
 
         cycles++;
 
-        if(zombieList.size() == 0 && zombieManager.getRemainingZombies() == 0)
+        if(activeGameObjectList.countZombies() == 0 && zombieManager.getRemainingZombies() == 0)
             updateWinner(Player.PLAYER);
 
     }
@@ -62,11 +64,11 @@ public class Game {
         Plant p = PlantFactory.getPlant(plant);
         boolean added = false;
 
-        if (p != null && isEmpty(x, y) && suncoinManager.suncoins >= p.getCost() && isValidPosition(x, y)){
+        if (p != null && isEmpty(x, y) && sunManager.suncoins >= p.getCost() && isValidPosition(x, y)){
             p.setPosition(x,y);
             p.setGame(this);
-            suncoinManager.suncoins-= p.getCost();
-            plantList.add(p);
+            sunManager.suncoins-= p.getCost();
+            activeGameObjectList.add(p);
             added = true;
         }
 
@@ -81,9 +83,17 @@ public class Game {
         if (z != null){
             z.setPosition(x,y);
             z.setGame(this);
-            zombieList.add(z);
+            activeGameObjectList.add(z);
         }
         return z != null;
+    }
+
+    public void addSun(int x, int y){
+        sunManager.addSun(new Sun(), x, y);
+    }
+
+    public boolean catchSun(int x, int y){
+        return sunManager.catchSun(x,y);
     }
 
     public void reset(){
@@ -91,31 +101,19 @@ public class Game {
     }
 
     public boolean isEmpty(int x, int y){
-        return getPInPosition(x, y) == null && getZInPosition(x, y) == null;
+        return getActiveObjectPosition(x,y) == null;
     }
 
     private boolean isValidPosition(int x, int y){
         return x < ROWS && y < COLUMNS-1 && x >= 0 && y >= 0;
     }
 
-    public Plant getPInPosition(int x, int y){
-        return (Plant) plantList.search(x, y);
+    public ActiveGameObject getActiveObjectPosition(int x, int y){
+        return activeGameObjectList.search(x,y);
     }
 
-    public Zombie getZInPosition(int x, int y){
-        return (Zombie) zombieList.search(x, y);
-    }
-
-    public void incrementSuncoins(int n){
-        this.suncoinManager.suncoins += n;
-    }
-
-    public void removePlant(Plant p){
-        plantList.remove(p);
-    }
-
-    public void removeZombie(Zombie z){
-        zombieList.remove(z);
+    public void removeActiveGameObject(ActiveGameObject obj){
+        activeGameObjectList.remove(obj);
     }
 
     private boolean canZombieAdded(){
@@ -139,10 +137,10 @@ public class Game {
     }
 
     private void initialize(){
-        this.plantList = new GameObjectList();
-        this.zombieList = new GameObjectList();
-        this.suncoinManager = new SuncoinManager();
+        this.pasiveGameObjectList = new PassiveGameObjectList();
+        this.activeGameObjectList = new ActiveGameObjectList();
         this.rand = new Random(seed);
+        this.sunManager = new SunManager(rand);
         this.zombieManager = new ZombieManager(level, rand);
         this.cycles = 0;
         this.winner = Player.NONE;
@@ -174,10 +172,20 @@ public class Game {
         StringBuilder buff = new StringBuilder();
 
         buff.append("Number of cycles: ").append(this.cycles).append(System.getProperty("line.separator"));
-        buff.append("Sun coins: ").append(suncoinManager.suncoins).append(System.getProperty("line.separator"));
+        buff.append("Sun coins: ").append(sunManager.suncoins).append(System.getProperty("line.separator"));
         buff.append("Remaining zombies: ").append(zombieManager.getRemainingZombies()).append(System.getProperty("line.separator"));
 
         return buff.toString();
+    }
+
+    public String positionToString(int i, int j){
+        String sunString = sunManager.positionToString(i,j);
+
+        ActiveGameObject obj = activeGameObjectList.search(i,j);
+
+        if (obj != null)
+            return obj.toString() + " " + sunString;
+        return " " + sunString;
     }
 
 }

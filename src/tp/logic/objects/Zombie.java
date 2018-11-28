@@ -2,15 +2,12 @@ package tp.logic.objects;
 
 public abstract class Zombie extends GameObject{
 
-    private static final char SYMBOL = 'Z';
-
     private int frequency;
     private int damage;
 
     public Zombie(int frequency, int damage){
         this.frequency = frequency;
         this.damage = damage;
-        super.symbol = SYMBOL;
     }
 
     @Override

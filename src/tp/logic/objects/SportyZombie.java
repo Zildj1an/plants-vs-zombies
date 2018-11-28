@@ -5,10 +5,13 @@ public class SportyZombie extends Zombie {
     private static final int FREQUENCY = 1;
     private static final int DAMAGE = 1;
 
+    private static final char SYMBOL = 'X';
+
     public SportyZombie(){
         super(FREQUENCY, DAMAGE);
         super.health = HEALTH;
         super.cycle = FREQUENCY-1;
+        super.symbol = SYMBOL;
     }
 
 

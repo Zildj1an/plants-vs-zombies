@@ -33,7 +33,7 @@ public class GameObjectList {
 
         if((pos = searchPosition(obj)) != -1){
             removed = true;
-            for(int i = pos; i < count; i++){
+            for(int i = pos; i < count-1; i++){
                 list[i] = list[i+1];
             }
             count--;

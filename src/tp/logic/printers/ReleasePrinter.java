@@ -1,8 +1,7 @@
-package tp.logic.gamePrinter;
+package tp.logic.printers;
 
 import tp.logic.Game;
 import tp.logic.objects.GameObject;
-import tp.logic.objects.Plant;
 import tp.logic.objects.Zombie;
 import tp.util.MyStringUtils;
 

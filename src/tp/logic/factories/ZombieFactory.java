@@ -10,7 +10,7 @@ import java.util.Random;
 public class ZombieFactory {
 
     private static Zombie[] availableZombies = {new SportyZombie(), new BucketheadZombie(), new CommonZombie()};
-    private static String[] zombieNames = {"athlete", "common", "buckethead"};
+    private static String[] zombieNames = {"sporty", "common", "buckethead"};
 
     public static Zombie getZombie(String zombieName){
         Zombie z = null;

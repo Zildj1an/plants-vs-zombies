@@ -1,4 +1,4 @@
-package tp.logic.gamePrinter;
+package tp.logic.printers;
 
 import tp.logic.Game;
 import tp.logic.objects.GameObject;

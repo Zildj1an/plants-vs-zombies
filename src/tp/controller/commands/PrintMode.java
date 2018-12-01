@@ -2,8 +2,8 @@ package tp.controller.commands;
 
 import tp.controller.Controller;
 import tp.logic.Game;
-import tp.logic.gamePrinter.DebugPrinter;
-import tp.logic.gamePrinter.ReleasePrinter;
+import tp.logic.printers.DebugPrinter;
+import tp.logic.printers.ReleasePrinter;
 
 public class PrintMode extends Command {
 

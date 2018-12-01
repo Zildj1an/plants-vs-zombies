@@ -2,6 +2,8 @@ package tp.controller.commands;
 
 import tp.controller.Controller;
 import tp.logic.Game;
+import tp.logic.factories.ZombieFactory;
+import tp.logic.objects.Zombie;
 
 public class AddZombie extends Command {
     public static final String commandText = "addzombie";
@@ -18,7 +20,9 @@ public class AddZombie extends Command {
 
     @Override
     public void execute(Game game, Controller controller) {
-        if(!game.addZombie(zombie, x, y)){
+        Zombie z = ZombieFactory.getZombie(zombie);
+
+        if(!game.addZombie(z, x, y)){
             System.out.println("[ERROR] zombie " + zombie + " couldn't be added");
         }
     }

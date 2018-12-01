@@ -2,6 +2,8 @@ package tp.controller.commands;
 
 import tp.controller.Controller;
 import tp.logic.Game;
+import tp.logic.factories.PlantFactory;
+import tp.logic.objects.Plant;
 
 public class AddCommand extends Command{
     public static final String commandText = "add";
@@ -19,9 +21,9 @@ public class AddCommand extends Command{
 
     @Override
     public void execute(Game game, Controller controller) {
-        if (!game.addPlant(plant, x, y)){
+        Plant p = PlantFactory.getPlant(plant);
+        if (!game.addPlant(p, x, y)){
             System.out.println("[ERROR] plant " + plant + " couldn't be added");
-            controller.setNoPrintGameState();
         }
         game.update();
     }

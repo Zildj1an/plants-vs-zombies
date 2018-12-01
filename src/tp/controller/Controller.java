@@ -3,9 +3,8 @@ package tp.controller;
 import tp.controller.commands.Command;
 import tp.controller.commands.CommandParser;
 import tp.logic.Game;
-import tp.logic.gamePrinter.DebugPrinter;
-import tp.logic.gamePrinter.GamePrinter;
-import tp.logic.gamePrinter.ReleasePrinter;
+import tp.logic.printers.GamePrinter;
+import tp.logic.printers.ReleasePrinter;
 import tp.logic.objects.Player;
 
 import java.util.Scanner;

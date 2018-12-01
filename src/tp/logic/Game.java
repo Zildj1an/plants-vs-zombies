@@ -58,8 +58,7 @@ public class Game {
 
     }
 
-    public boolean addPlant(String plant, int x, int y){
-        Plant p = PlantFactory.getPlant(plant);
+    public boolean addPlant(Plant p, int x, int y){
         boolean added = false;
 
         if (p != null && isEmpty(x, y) && suncoinManager.suncoins >= p.getCost() && isValidPosition(x, y)){
@@ -75,8 +74,7 @@ public class Game {
     }
 
     //Method only for debug purpose
-    public boolean addZombie(String zombie, int x, int y){
-        Zombie z = ZombieFactory.getZombie(zombie);
+    public boolean addZombie(Zombie z, int x, int y){
 
         if (z != null){
             z.setPosition(x,y);

@@ -8,6 +8,7 @@ public class Peashooter extends Plant{
     private static final int HEALTH = 3;
     private static final int FREQUENCY = 1;
     private static final int DAMAGE = 1;
+    private static final String NAME = "Peashooter";
 
     private static final char SYMBOL = 'P';
 
@@ -16,6 +17,7 @@ public class Peashooter extends Plant{
         super.health = HEALTH;
         super.cycle = 0;
         super.symbol = SYMBOL;
+        super.name = NAME;
     }
 
     public void update(){

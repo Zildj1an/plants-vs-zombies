@@ -4,6 +4,7 @@ public class BucketheadZombie extends Zombie{
     private static final int HEALTH = 8;
     private static final int FREQUENCY = 4;
     private static final int DAMAGE = 1;
+    private static final String NAME = "Buckethead zombie";
 
     private static final char SYMBOL = 'W';
 
@@ -12,6 +13,7 @@ public class BucketheadZombie extends Zombie{
         super.health = HEALTH;
         super.cycle = FREQUENCY-1;
         super.symbol = SYMBOL;
+        super.name = NAME;
     }
 
     @Override

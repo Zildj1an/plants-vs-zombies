@@ -1,6 +1,6 @@
 package tp.controller.commands;
 
-import tp.controller.Controller;
+import tp.exceptions.CommandParserException;
 
 public abstract class NoParamsCommand extends Command {
 
@@ -9,11 +9,17 @@ public abstract class NoParamsCommand extends Command {
     }
 
     @Override
-    public Command parse(String[] commandWords, Controller controller) {
+    public Command parse(String[] commandWords) throws CommandParserException {
+        Command c = null;
 
         if(commandName.equals(""))
-            return (commandWords.length == 1 && commandWords[0].equalsIgnoreCase(commandName) ? this : null);
-        else
-            return (commandWords.length == 1 && (commandWords[0].equalsIgnoreCase(commandName) || commandWords[0].equals(Character.toString(commandName.charAt(0)))) ? this : null);
+            c = commandWords[0].equalsIgnoreCase(commandName) ? this : null;
+        else {
+            if (commandWords[0].equalsIgnoreCase(commandName) || commandWords[0].equals(Character.toString(commandName.charAt(0)))) {
+                if (commandWords.length != 1) throw new CommandParserException(commandName + " command has no argument");
+                c = this;
+            }
+        }
+        return c;
     }
 }

@@ -17,15 +17,15 @@ public class ZombieFactory {
 
         switch (zombieName){
             case "sporty":
-            case "s":
+            case "x":
                 z = new SportyZombie();
                 break;
             case "common":
-            case "c":
+            case "z":
                 z = new CommonZombie();
                 break;
             case "buckethead":
-            case "b":
+            case "w":
                 z = new BucketheadZombie();
                 break;
         }

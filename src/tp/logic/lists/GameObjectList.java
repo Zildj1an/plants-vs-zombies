@@ -1,6 +1,13 @@
 package tp.logic.lists;
 
+import tp.exceptions.GameObjectException;
+import tp.logic.Game;
+import tp.logic.factories.PlantFactory;
+import tp.logic.factories.ZombieFactory;
 import tp.logic.objects.GameObject;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class GameObjectList {
     private static final int INITIAL_SIZE = 5;
@@ -15,6 +22,25 @@ public class GameObjectList {
     public GameObjectList(int size){
         this.count = 0;
         this.list = new GameObject[size];
+    }
+
+    public GameObjectList(String[] list, Game g) throws GameObjectException{
+        this();
+
+        for (String s : list) {
+            String[] dataObjectInfo = s.split(":");
+            GameObject obj;
+
+            if((obj = PlantFactory.getPlant(dataObjectInfo[0].toLowerCase())) == null && (obj = ZombieFactory.getZombie(dataObjectInfo[0].toLowerCase())) == null)
+                throw new GameObjectException("Invalid type of game object");
+
+            obj.setHealth(Integer.parseInt(dataObjectInfo[1]));
+            obj.setPosition(Integer.parseInt(dataObjectInfo[2]),Integer.parseInt(dataObjectInfo[3]));
+            obj.setCycle(Integer.parseInt(dataObjectInfo[4]));
+            obj.setGame(g);
+
+            add(obj);
+        }
     }
 
     public boolean add(GameObject obj){
@@ -77,10 +103,6 @@ public class GameObjectList {
         return found? i : -1;
     }
 
-    public GameObject searchPosition(int x, int y){
-        return null;
-    }
-
     private void resize(){
         GameObject[] l = new GameObject[count+ INITIAL_SIZE];
         System.arraycopy(list, 0, l, 0, count);
@@ -94,5 +116,20 @@ public class GameObjectList {
     public void update(){
         for (int i = 0; i < count; i++)
             list[i].update();
+    }
+
+    public void store(BufferedWriter bf) throws IOException {
+        for (int i = 0; i < count; i++) {
+            list[i].store(bf);
+            if (i != count-1)
+                bf.write(',');
+        }
+    }
+
+    public GameObject get(int i){
+        if (i >= count)
+            return null;
+
+        return this.list[i];
     }
 }

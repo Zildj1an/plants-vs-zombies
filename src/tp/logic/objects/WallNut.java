@@ -4,13 +4,15 @@ public class WallNut extends Plant{
     private static final int COST = 50;
     private static final int HEALTH = 10;
     private static final int DAMAGE = 0;
-
+    private static final String NAME = "Wallnut";
     private static final char SYMBOL = 'N';
+
 
     public WallNut(){
         super(COST);
         this.health = HEALTH;
         super.symbol = SYMBOL;
+        super.name = NAME;
     }
 
     @Override

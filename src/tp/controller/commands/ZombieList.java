@@ -1,6 +1,5 @@
 package tp.controller.commands;
 
-import tp.controller.Controller;
 import tp.logic.Game;
 import tp.logic.factories.ZombieFactory;
 
@@ -14,8 +13,8 @@ public class ZombieList extends NoParamsCommand{
     }
 
     @Override
-    public void execute(Game game, Controller controller) {
+    public boolean execute(Game game) {
         System.out.println(ZombieFactory.listOfAvilableZombies());
-        controller.setNoPrintGameState();
+        return false;
     }
 }

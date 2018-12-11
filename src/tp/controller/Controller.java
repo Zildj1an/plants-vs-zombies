@@ -2,6 +2,8 @@ package tp.controller;
 
 import tp.controller.commands.Command;
 import tp.controller.commands.CommandParser;
+import tp.exceptions.CommandExecuteException;
+import tp.exceptions.CommandParserException;
 import tp.logic.Game;
 import tp.logic.printers.GamePrinter;
 import tp.logic.printers.ReleasePrinter;
@@ -12,58 +14,45 @@ import java.util.Scanner;
 public class Controller {
 
     private static  final String PROMPT = "COMMAND > ";
-    private static final String UNKNOWNCOMMANDMSG = "Invalid command";
+    private static final String UNKNOWNCOMMANDMSG = "Unknown command. Use 'help' to see the available commands" + System.getProperty("line.separator");
     private static  final String GAMEOVER = "Game Over";
 
     private Game game;
     private Scanner in;
-    private boolean noPrint;
-    private boolean exit = false;
     private GamePrinter gamePrinter;
 
     public Controller (Game game, Scanner in){
         this.game = game;
         this.in= in;
-        gamePrinter = new ReleasePrinter();
     }
 
     public void run(){
         Player winner = Player.NONE;
+        printGame();
         do {
-            printGame();
-            noPrint = false;
-
             System.out.print(PROMPT);
             String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
-            Command command = CommandParser.parseCommand(words, this);
 
-            if (command != null){
-                command.execute(game, this);
-                winner = game.hasWinner();
-            }else{
-                System.out.println(UNKNOWNCOMMANDMSG);
-                setNoPrintGameState();
+            try{
+                Command command = CommandParser.parseCommand(words);
+                if (command != null){
+                    if (command.execute(game))
+                        printGame();
+                }else
+                    System.out.println(UNKNOWNCOMMANDMSG);
+            }catch (CommandExecuteException | CommandParserException ex){
+                System.out.format(ex.getMessage() + "%n%n");
             }
 
-        }while(!exit && winner == Player.NONE);
-        printGame();
-        System.out.println(GAMEOVER + "\n" + winner.getName() + " win");
-    }
-
-    public void setExit(){
-        this.exit = true;
-    }
-
-    public void setNoPrintGameState(){
-        noPrint = true;
+        }while(!game.hasFinished() && (winner = game.hasWinner()) == Player.NONE);
+        if (game.hasFinished())
+            System.out.println("****** Game over!: User exit ******");
+        else
+            System.out.println(GAMEOVER + "\n" + winner.getName() + " win");
     }
 
     private void printGame(){
-        if (!noPrint)
-            System.out.println(gamePrinter.printGame(game));
-    }
-
-    public void setModePrint(GamePrinter mode){
-        gamePrinter = mode;
+        gamePrinter = game.getModePrint();
+        System.out.println(gamePrinter.printGame(game));
     }
 }

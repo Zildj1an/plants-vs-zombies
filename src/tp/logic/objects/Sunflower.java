@@ -6,6 +6,7 @@ public class Sunflower extends Plant{
     private static final int FREQUENCY = 2;
     private static final int DAMAGE = 0;
     private static final int SUNCOINS = 10;
+    private static final String NAME = "Sunflower";
 
     private static final char SYMBOL = 'S';
 
@@ -14,6 +15,7 @@ public class Sunflower extends Plant{
         super.health = HEALTH;
         super.cycle = FREQUENCY;
         super.symbol = SYMBOL;
+        super.name = NAME;
     }
 
     public void update(){

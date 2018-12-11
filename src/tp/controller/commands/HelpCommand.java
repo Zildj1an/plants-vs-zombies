@@ -1,23 +1,23 @@
 package tp.controller.commands;
 
-import tp.controller.Controller;
 import tp.logic.Game;
 
 
 public class HelpCommand extends NoParamsCommand {
-    public static final String commandText = "help";
-    public static final String commandTextMsg = "[H]elp";
-    public static final String helpTextMsg = "print this help message.";
+    public static final String COMMAND_TEXT = "help";
+    public static final String COMMAND_TEXT_MSG = "[H]elp";
+    public static final String HELP_TEXT_MSG = "print this help message.";
 
 
     public HelpCommand() {
-        super(commandText, commandTextMsg, helpTextMsg);
+        super(COMMAND_TEXT, COMMAND_TEXT_MSG, HELP_TEXT_MSG);
     }
 
     @Override
-    public void execute(Game game, Controller controller) {
+    public boolean execute(Game game) {
         System.out.println("The available commands are:  \n" + CommandParser.commandHelp());
-        controller.setNoPrintGameState();
+
+        return false;
     }
 
 }
